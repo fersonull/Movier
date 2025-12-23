@@ -108,6 +108,27 @@ class Comment
     }
 
     /**
+     * Add new comment to JSON file
+     */
+    public static function create(array $data): Comment
+    {
+        $path = storage_path('app/data/comments.json');
+        $comments = json_decode(file_get_contents($path), true) ?? [];
+        
+        $newId = collect($comments)->max('id') + 1;
+        $newComment = array_merge($data, [
+            'id' => $newId,
+            'created_at' => date('Y-m-d'),
+            'helpful_votes' => 0
+        ]);
+        
+        $comments[] = $newComment;
+        file_put_contents($path, json_encode($comments, JSON_PRETTY_PRINT));
+        
+        return new static($newComment);
+    }
+
+    /**
      * Convert to array
      */
     public function toArray(): array

@@ -99,12 +99,16 @@ class Movie
     }
 
     /**
-     * Search movies by title
+     * Search movies by title, description, or genre
      */
     public static function search(string $query): Collection
     {
         return static::all()->filter(function ($movie) use ($query) {
-            return stripos($movie->title, $query) !== false;
+            return stripos($movie->title, $query) !== false ||
+                   stripos($movie->description, $query) !== false ||
+                   collect($movie->genres)->some(function ($genre) use ($query) {
+                       return stripos($genre, $query) !== false;
+                   });
         });
     }
 

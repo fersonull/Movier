@@ -14,11 +14,23 @@ class MovieController extends Controller
     public function index(Request $request): View
     {
         $genre = $request->get('genre');
-        $movies = $genre ? Movie::byGenre($genre) : Movie::all();
+        $search = $request->get('search');
+        
+        if ($search) {
+            $movies = Movie::search($search);
+            if ($genre) {
+                $movies = $movies->filter(function ($movie) use ($genre) {
+                    return in_array($genre, $movie->genres ?? []);
+                });
+            }
+        } else {
+            $movies = $genre ? Movie::byGenre($genre) : Movie::all();
+        }
+        
         $genres = Movie::getAllGenres();
-        $featuredMovies = Movie::featured();
+        $featuredMovies = $search || $genre ? collect() : Movie::featured();
 
-        return view('movies.index', compact('movies', 'genres', 'featuredMovies', 'genre'));
+        return view('movies.index', compact('movies', 'genres', 'featuredMovies', 'genre', 'search'));
     }
 
     /**
@@ -46,6 +58,46 @@ class MovieController extends Controller
         $comments = $movie->comments();
 
         return view('movies.show', compact('movie', 'relatedMovies', 'comments'));
+    }
+
+    /**
+     * Store a new comment for a movie
+     */
+    public function storeComment(Request $request, int $id)
+    {
+        $request->validate([
+            'user_name' => 'required|string|max:255',
+            'rating' => 'required|integer|min:1|max:5',
+            'comment' => 'required|string|max:1000',
+        ]);
+
+        $movie = Movie::find($id);
+        if (!$movie) {
+            return back()->with('error', 'Movie not found');
+        }
+
+        $userData = [
+            'id' => rand(1000, 9999),
+            'name' => $request->user_name,
+            'username' => strtolower(str_replace(' ', '_', $request->user_name)),
+            'avatar' => 'https://picsum.photos/100/100?random=' . rand(200, 999),
+            'verified' => false,
+            'total_reviews' => 1
+        ];
+
+        Comment::create([
+            'movie_id' => $id,
+            'user_id' => $userData['id'],
+            'rating' => $request->rating,
+            'comment' => $request->comment,
+        ]);
+
+        $usersPath = storage_path('app/data/users.json');
+        $users = json_decode(file_get_contents($usersPath), true) ?? [];
+        $users[] = $userData;
+        file_put_contents($usersPath, json_encode($users, JSON_PRETTY_PRINT));
+
+        return back()->with('success', 'Review added successfully!');
     }
 
     /**
