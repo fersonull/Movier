@@ -157,6 +157,13 @@
         font-size: 0.875rem;
     }
 
+    .card-star-icon {
+        width: 14px;
+        height: 14px;
+        color: #eab308;
+        fill: #eab308;
+    }
+
     .movie-genres {
         font-family: 'Outfit', sans-serif;
         color: #71717a;
@@ -326,7 +333,7 @@
                         <div class="movie-meta">
                             <span class="movie-year">{{ $movie->year }}</span>
                             <div class="movie-rating">
-                                <span>⭐</span>
+                                <i data-lucide="star" class="card-star-icon"></i>
                                 <span>{{ number_format($movie->rating, 1) }}</span>
                             </div>
                         </div>

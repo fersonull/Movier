@@ -82,8 +82,24 @@
     }
 
     .stars {
-        font-size: 1.25rem;
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+    }
+
+    .hero-star-icon {
+        width: 20px;
+        height: 20px;
+    }
+
+    .hero-star-icon.filled {
         color: #eab308;
+        fill: #eab308;
+    }
+
+    .hero-star-icon.empty {
+        color: #d1d5db;
+        fill: none;
     }
 
     .rating-number {
@@ -258,12 +274,41 @@
     .comment-rating {
         display: flex;
         align-items: center;
-        gap: 0.3rem;
-        background: #fff3cd;
-        padding: 0.2rem 0.6rem;
-        border-radius: 15px;
-        color: #856404;
+        gap: 0.5rem;
+        background: #f4f4f5;
+        padding: 0.375rem 0.75rem;
+        border-radius: 6px;
+        border: 1px solid #e4e4e7;
         font-weight: 500;
+    }
+
+    .rating-stars {
+        display: flex;
+        align-items: center;
+        gap: 0.125rem;
+    }
+
+    .star-icon {
+        width: 14px;
+        height: 14px;
+        transition: all 0.2s ease;
+    }
+
+    .star-icon.filled {
+        color: #eab308;
+        fill: #eab308;
+    }
+
+    .star-icon.empty {
+        color: #d1d5db;
+        fill: none;
+    }
+
+    .rating-text {
+        font-family: 'Outfit', sans-serif;
+        font-size: 0.875rem;
+        color: #52525b;
+        font-weight: 600;
     }
 
     .comment-date {
@@ -286,12 +331,21 @@
         display: flex;
         align-items: center;
         gap: 0.5rem;
-        color: #666;
-        font-size: 0.9rem;
+        color: #71717a;
+        font-size: 0.875rem;
+        font-family: 'Outfit', sans-serif;
+        font-weight: 500;
     }
 
     .helpful-icon {
-        color: #28a745;
+        width: 16px;
+        height: 16px;
+        color: #22c55e;
+        transition: all 0.2s ease;
+    }
+
+    .helpful-votes:hover .helpful-icon {
+        color: #16a34a;
     }
 
     .no-comments {
@@ -495,11 +549,11 @@
                     <div class="stars">
                         @for($i = 1; $i <= 5; $i++)
                             @if($i <= floor($movie->rating))
-                                ⭐
+                                <i data-lucide="star" class="hero-star-icon filled"></i>
                             @elseif($i - 0.5 <= $movie->rating)
-                                ⭐
+                                <i data-lucide="star" class="hero-star-icon filled"></i>
                             @else
-                                ☆
+                                <i data-lucide="star" class="hero-star-icon empty"></i>
                             @endif
                         @endfor
                     </div>
@@ -573,8 +627,16 @@
                                 </div>
                                 <div class="comment-meta">
                                     <div class="comment-rating">
-                                        <span>⭐</span>
-                                        <span>{{ $comment->rating }}/5</span>
+                                        <div class="rating-stars">
+                                            @for($i = 1; $i <= 5; $i++)
+                                                @if($i <= $comment->rating)
+                                                    <i data-lucide="star" class="star-icon filled"></i>
+                                                @else
+                                                    <i data-lucide="star" class="star-icon empty"></i>
+                                                @endif
+                                            @endfor
+                                        </div>
+                                        <span class="rating-text">{{ $comment->rating }}/5</span>
                                     </div>
                                     <span class="comment-date">{{ $comment->getFormattedDateAttribute() }}</span>
                                     @if($user)
@@ -590,7 +652,7 @@
 
                         <div class="comment-actions">
                             <div class="helpful-votes">
-                                <span class="helpful-icon">👍</span>
+                                <i data-lucide="thumbs-up" class="helpful-icon"></i>
                                 <span>{{ $comment->helpful_votes }} found this helpful</span>
                             </div>
                         </div>
