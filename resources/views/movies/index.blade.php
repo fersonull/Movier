@@ -6,99 +6,118 @@
 <style>
     /* Hero Section */
     .hero {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
+        background: #ffffff;
+        border-bottom: 1px solid #e4e4e7;
         padding: 4rem 0;
         text-align: center;
-        margin-bottom: 3rem;
+        margin-bottom: 0;
     }
 
     .hero h1 {
+        font-family: 'Outfit', sans-serif;
         font-size: 3rem;
         margin-bottom: 1rem;
         font-weight: 700;
+        color: #0a0a0a;
+        letter-spacing: -0.025em;
     }
 
     .hero p {
-        font-size: 1.2rem;
-        opacity: 0.9;
+        font-family: 'Outfit', sans-serif;
+        font-size: 1.125rem;
+        color: #52525b;
         max-width: 600px;
         margin: 0 auto;
+        font-weight: 400;
     }
 
     /* Genre Filter */
     .genre-filter {
-        background: white;
+        background: #ffffff;
+        border: 1px solid #e4e4e7;
         padding: 2rem;
-        border-radius: 10px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        margin-bottom: 3rem;
+        border-radius: 12px;
+        margin: 2rem 0;
     }
 
     .genre-filter h2 {
-        margin-bottom: 1rem;
-        color: #333;
+        font-family: 'Outfit', sans-serif;
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+        color: #0a0a0a;
     }
 
     .genre-tags {
         display: flex;
         flex-wrap: wrap;
-        gap: 1rem;
+        gap: 0.75rem;
     }
 
     .genre-tag {
+        font-family: 'Outfit', sans-serif;
         display: inline-block;
         padding: 0.5rem 1rem;
-        background: #f1f3f4;
-        color: #333;
+        background: #f4f4f5;
+        color: #52525b;
         text-decoration: none;
-        border-radius: 25px;
-        transition: all 0.3s;
+        border-radius: 6px;
+        border: 1px solid #e4e4e7;
+        transition: all 0.2s ease;
         font-weight: 500;
+        font-size: 0.875rem;
     }
 
-    .genre-tag:hover,
+    .genre-tag:hover {
+        background: #e4e4e7;
+        color: #0a0a0a;
+        border-color: #d4d4d8;
+    }
+
     .genre-tag.active {
-        background: #e74c3c;
-        color: white;
-        transform: translateY(-2px);
+        background: #0a0a0a;
+        color: #ffffff;
+        border-color: #0a0a0a;
     }
 
     /* Movies Grid */
     .section-title {
+        font-family: 'Outfit', sans-serif;
         font-size: 2rem;
         margin-bottom: 2rem;
-        color: #333;
+        color: #0a0a0a;
         font-weight: 600;
+        letter-spacing: -0.025em;
     }
 
     .movies-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-        gap: 2rem;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 1.5rem;
         margin-bottom: 3rem;
     }
 
     .movie-card {
-        background: white;
-        border-radius: 15px;
+        background: #ffffff;
+        border: 1px solid #e4e4e7;
+        border-radius: 12px;
         overflow: hidden;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        transition: all 0.3s ease;
+        transition: all 0.2s ease;
         text-decoration: none;
         color: inherit;
+        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
     }
 
     .movie-card:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        border-color: #d4d4d8;
     }
 
     .movie-poster {
         width: 100%;
         height: 400px;
         object-fit: cover;
-        background: #f0f0f0;
+        background: #f4f4f5;
     }
 
     .movie-info {
@@ -106,10 +125,11 @@
     }
 
     .movie-title {
-        font-size: 1.2rem;
+        font-family: 'Outfit', sans-serif;
+        font-size: 1.25rem;
         font-weight: 600;
-        margin-bottom: 0.5rem;
-        color: #333;
+        margin-bottom: 0.75rem;
+        color: #0a0a0a;
         line-height: 1.3;
     }
 
@@ -117,74 +137,152 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 0.5rem;
+        margin-bottom: 0.75rem;
     }
 
     .movie-year {
-        color: #666;
-        font-size: 0.9rem;
+        font-family: 'Outfit', sans-serif;
+        color: #71717a;
+        font-size: 0.875rem;
+        font-weight: 500;
     }
 
     .movie-rating {
         display: flex;
         align-items: center;
-        gap: 0.3rem;
-        color: #f39c12;
+        gap: 0.25rem;
+        color: #eab308;
+        font-family: 'Outfit', sans-serif;
         font-weight: 600;
+        font-size: 0.875rem;
     }
 
     .movie-genres {
-        color: #666;
-        font-size: 0.9rem;
-        margin-bottom: 1rem;
+        font-family: 'Outfit', sans-serif;
+        color: #71717a;
+        font-size: 0.875rem;
+        margin-bottom: 0.75rem;
+        font-weight: 400;
     }
 
     .movie-description {
-        color: #555;
-        font-size: 0.9rem;
-        line-height: 1.5;
+        font-family: 'Outfit', sans-serif;
+        color: #52525b;
+        font-size: 0.875rem;
+        line-height: 1.6;
         display: -webkit-box;
         -webkit-line-clamp: 3;
         -webkit-box-orient: vertical;
         overflow: hidden;
+        font-weight: 400;
     }
 
     /* Featured Section */
     .featured-movies {
         margin-bottom: 4rem;
+        background: #ffffff;
+        border: 1px solid #e4e4e7;
+        border-radius: 12px;
+        padding: 2rem;
+        margin-top: 2rem;
     }
 
     .featured-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 2rem;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 1.5rem;
     }
 
     /* Empty State */
     .empty-state {
         text-align: center;
         padding: 4rem 2rem;
-        color: #666;
+        color: #71717a;
+        background: #ffffff;
+        border: 1px solid #e4e4e7;
+        border-radius: 12px;
+        margin: 2rem 0;
     }
 
     .empty-state h3 {
+        font-family: 'Outfit', sans-serif;
         font-size: 1.5rem;
+        font-weight: 600;
         margin-bottom: 1rem;
+        color: #0a0a0a;
+    }
+
+    .empty-state p {
+        font-family: 'Outfit', sans-serif;
+        font-weight: 400;
     }
 
     /* Responsive */
     @media (max-width: 768px) {
+        .hero {
+            padding: 3rem 0;
+        }
+
         .hero h1 {
-            font-size: 2rem;
+            font-size: 2.25rem;
+        }
+
+        .hero p {
+            font-size: 1rem;
+        }
+        
+        .genre-filter {
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .genre-filter h2 {
+            font-size: 1.25rem;
         }
         
         .movies-grid {
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.25rem;
+        }
+
+        .featured-movies {
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .featured-grid {
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
         }
         
         .genre-tags {
             justify-content: center;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .hero {
+            padding: 2rem 0;
+        }
+
+        .hero h1 {
+            font-size: 1.875rem;
+        }
+
+        .genre-filter {
+            padding: 1rem;
+        }
+
+        .movies-grid {
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        .featured-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .movie-info {
+            padding: 1.25rem;
         }
     }
 </style>
