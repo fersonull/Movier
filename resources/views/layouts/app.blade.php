@@ -5,208 +5,64 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Movier - Movie Rating Platform')</title>
     
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-    
-    <!-- CSS -->
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            line-height: 1.6;
-            color: #0a0a0a;
-            background-color: #fafafa;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Header */
-        .header {
-            background: #ffffff;
-            border-bottom: 1px solid #e4e4e7;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 0;
-        }
-
-        .logo {
-            font-family: 'Outfit', sans-serif;
-            font-size: 1.875rem;
-            font-weight: 700;
-            color: #0a0a0a;
-            text-decoration: none;
-            letter-spacing: -0.025em;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 0.5rem;
-        }
-
-        .nav-link {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem 1rem;
-            text-decoration: none;
-            color: #71717a;
-            font-family: 'Outfit', sans-serif;
-            font-weight: 500;
-            font-size: 0.875rem;
-            border-radius: 6px;
-            transition: all 0.2s ease;
-        }
-
-        .nav-link:hover {
-            background: #f4f4f5;
-            color: #0a0a0a;
-        }
-
-        .nav-link.active {
-            background: #0a0a0a;
-            color: #ffffff;
-        }
-
-        .nav-icon {
-            width: 16px;
-            height: 16px;
-        }
-
-        /* Main content */
-        .main {
-            min-height: calc(100vh - 140px);
-            padding: 2rem 0;
-        }
-
-        /* Footer */
-        .footer {
-            background: #0a0a0a;
-            color: #fafafa;
-            text-align: center;
-            padding: 2rem 0;
-            margin-top: 3rem;
-            border-top: 1px solid #e4e4e7;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .nav {
-                flex-direction: column;
-                gap: 1rem;
-                padding: 1rem 0;
-            }
-            
-            .nav-links {
-                gap: 0.5rem;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-
-            .nav-link {
-                padding: 0.375rem 0.75rem;
-                font-size: 0.8125rem;
-            }
-
-            .nav-icon {
-                width: 14px;
-                height: 14px;
-            }
-            
-            .container {
-                padding: 0 15px;
-            }
-
-            .logo {
-                font-size: 1.5rem;
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'outfit': ['Outfit', 'sans-serif'],
+                    }
+                }
             }
         }
-
-        @media (max-width: 480px) {
-            .nav-links {
-                gap: 0.25rem;
-            }
-
-            .nav-link {
-                padding: 0.25rem 0.5rem;
-                font-size: 0.75rem;
-            }
-
-            .nav-link span {
-                display: none;
-            }
-
-            .nav-icon {
-                width: 18px;
-                height: 18px;
-            }
-        }
-    </style>
-    
+    </script>
     @yield('styles')
 </head>
-<body>
-    <!-- Header -->
-    <header class="header">
-        <div class="container">
-            <nav class="nav">
-                <a href="{{ route('movies.index') }}" class="logo">Movier</a>
-                <ul class="nav-links">
+<body class="font-outfit leading-relaxed text-zinc-950 bg-zinc-50">
+    <header class="bg-white border-b border-zinc-200 sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-6">
+            <nav class="flex justify-between items-center py-4 md:flex-col md:gap-4">
+                <a href="{{ route('movies.index') }}" class="text-3xl md:text-2xl font-bold text-zinc-950 no-underline tracking-tight">Movier</a>
+                <ul class="flex list-none gap-2 md:flex-wrap md:justify-center">
                     <li>
-                        <a href="{{ route('movies.index') }}" class="nav-link {{ !request()->get('genre') && request()->routeIs('movies.index') ? 'active' : '' }}">
-                            <i data-lucide="home" class="nav-icon"></i>
-                            <span>Home</span>
+                        <a href="{{ route('movies.index') }}" class="flex items-center gap-2 px-4 py-2 no-underline text-zinc-500 font-medium text-sm rounded-md transition-all duration-200 hover:bg-zinc-100 hover:text-zinc-950 {{ !request()->get('genre') && request()->routeIs('movies.index') ? 'bg-zinc-950 text-white' : '' }} md:px-3 md:py-1.5 md:text-xs">
+                            <i data-lucide="home" class="w-4 h-4 md:w-3.5 md:h-3.5 sm:w-4.5 sm:h-4.5"></i>
+                            <span class="sm:hidden">Home</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('movies.index') }}?genre=Action" class="nav-link {{ request()->get('genre') == 'Action' ? 'active' : '' }}">
-                            <i data-lucide="zap" class="nav-icon"></i>
-                            <span>Action</span>
+                        <a href="{{ route('movies.index') }}?genre=Action" class="flex items-center gap-2 px-4 py-2 no-underline text-zinc-500 font-medium text-sm rounded-md transition-all duration-200 hover:bg-zinc-100 hover:text-zinc-950 {{ request()->get('genre') == 'Action' ? 'bg-zinc-950 text-white' : '' }} md:px-3 md:py-1.5 md:text-xs">
+                            <i data-lucide="zap" class="w-4 h-4 md:w-3.5 md:h-3.5 sm:w-4.5 sm:h-4.5"></i>
+                            <span class="sm:hidden">Action</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('movies.index') }}?genre=Drama" class="nav-link {{ request()->get('genre') == 'Drama' ? 'active' : '' }}">
-                            <i data-lucide="heart" class="nav-icon"></i>
-                            <span>Drama</span>
+                        <a href="{{ route('movies.index') }}?genre=Drama" class="flex items-center gap-2 px-4 py-2 no-underline text-zinc-500 font-medium text-sm rounded-md transition-all duration-200 hover:bg-zinc-100 hover:text-zinc-950 {{ request()->get('genre') == 'Drama' ? 'bg-zinc-950 text-white' : '' }} md:px-3 md:py-1.5 md:text-xs">
+                            <i data-lucide="heart" class="w-4 h-4 md:w-3.5 md:h-3.5 sm:w-4.5 sm:h-4.5"></i>
+                            <span class="sm:hidden">Drama</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('movies.index') }}?genre=Comedy" class="nav-link {{ request()->get('genre') == 'Comedy' ? 'active' : '' }}">
-                            <i data-lucide="smile" class="nav-icon"></i>
-                            <span>Comedy</span>
+                        <a href="{{ route('movies.index') }}?genre=Comedy" class="flex items-center gap-2 px-4 py-2 no-underline text-zinc-500 font-medium text-sm rounded-md transition-all duration-200 hover:bg-zinc-100 hover:text-zinc-950 {{ request()->get('genre') == 'Comedy' ? 'bg-zinc-950 text-white' : '' }} md:px-3 md:py-1.5 md:text-xs">
+                            <i data-lucide="smile" class="w-4 h-4 md:w-3.5 md:h-3.5 sm:w-4.5 sm:h-4.5"></i>
+                            <span class="sm:hidden">Comedy</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('movies.index') }}?genre=Sci-Fi" class="nav-link {{ request()->get('genre') == 'Sci-Fi' ? 'active' : '' }}">
-                            <i data-lucide="rocket" class="nav-icon"></i>
-                            <span>Sci-Fi</span>
+                        <a href="{{ route('movies.index') }}?genre=Sci-Fi" class="flex items-center gap-2 px-4 py-2 no-underline text-zinc-500 font-medium text-sm rounded-md transition-all duration-200 hover:bg-zinc-100 hover:text-zinc-950 {{ request()->get('genre') == 'Sci-Fi' ? 'bg-zinc-950 text-white' : '' }} md:px-3 md:py-1.5 md:text-xs">
+                            <i data-lucide="rocket" class="w-4 h-4 md:w-3.5 md:h-3.5 sm:w-4.5 sm:h-4.5"></i>
+                            <span class="sm:hidden">Sci-Fi</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('movies.index') }}?genre=Thriller" class="nav-link {{ request()->get('genre') == 'Thriller' ? 'active' : '' }}">
-                            <i data-lucide="eye" class="nav-icon"></i>
-                            <span>Thriller</span>
+                        <a href="{{ route('movies.index') }}?genre=Thriller" class="flex items-center gap-2 px-4 py-2 no-underline text-zinc-500 font-medium text-sm rounded-md transition-all duration-200 hover:bg-zinc-100 hover:text-zinc-950 {{ request()->get('genre') == 'Thriller' ? 'bg-zinc-950 text-white' : '' }} md:px-3 md:py-1.5 md:text-xs">
+                            <i data-lucide="eye" class="w-4 h-4 md:w-3.5 md:h-3.5 sm:w-4.5 sm:h-4.5"></i>
+                            <span class="sm:hidden">Thriller</span>
                         </a>
                     </li>
                 </ul>
@@ -214,23 +70,19 @@
         </div>
     </header>
 
-    <!-- Main Content -->
-    <main class="main">
-        <div class="container">
+    <main class="min-h-screen py-8">
+        <div class="max-w-6xl mx-auto px-6">
             @yield('content')
         </div>
     </main>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
+    <footer class="bg-zinc-950 text-zinc-50 text-center py-8 mt-12 border-t border-zinc-200">
+        <div class="max-w-6xl mx-auto px-6">
             <p>&copy; {{ date('Y') }} Movier. A movie rating platform demo.</p>
         </div>
     </footer>
 
     @yield('scripts')
-    
-    <!-- Initialize Lucide Icons -->
     <script>
         lucide.createIcons();
     </script>
