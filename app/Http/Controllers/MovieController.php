@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use App\Models\Movie;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -15,7 +16,7 @@ class MovieController extends Controller
     {
         $genre = $request->get('genre');
         $search = $request->get('search');
-        
+
         if ($search) {
             $movies = Movie::search($search);
             if ($genre) {
@@ -26,7 +27,7 @@ class MovieController extends Controller
         } else {
             $movies = $genre ? Movie::byGenre($genre) : Movie::all();
         }
-        
+
         $genres = Movie::getAllGenres();
         $featuredMovies = $search || $genre ? collect() : Movie::featured();
 
@@ -39,7 +40,7 @@ class MovieController extends Controller
     public function show(int $id): View
     {
         $movie = Movie::find($id);
-        
+
         if (!$movie) {
             abort(404, 'Movie not found');
         }
@@ -107,7 +108,7 @@ class MovieController extends Controller
     {
         $genres = Movie::getAllGenres();
         $currentGenre = $genres->firstWhere('slug', $genreSlug);
-        
+
         if (!$currentGenre) {
             abort(404, 'Genre not found');
         }
